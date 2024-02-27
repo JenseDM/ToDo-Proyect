@@ -1,10 +1,11 @@
 from django.db import IntegrityError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from .forms import ProjectForm
-from .models import Project
+from .forms import ProjectForm, TaskForm
+from .models import Project, Task
+from django.utils import timezone
 
 # View for the home page
 def home(request):
@@ -38,7 +39,7 @@ def signup(request):
 
 def projects(request):
 
-    projects = Project.objects.filter(user=request.user, datecompleted__isnull=True)
+    projects = Project.objects.filter(user=request.user, completed=False)
     return render(request, 'projects.html', {
         'projects': projects
     
@@ -84,5 +85,43 @@ def createProject(request):
                 'error': 'Please provide valid data, try again.'
             })
 
-def tasks(request):
-    return render(request, 'tasks.html')        
+def tasks(request, project_id):
+    tasks = Task.objects.filter(project=project_id, completed=False)
+    return render(request, 'tasks.html', {
+        'tasks': tasks,
+        'project_id': project_id
+    })        
+
+def taskDetail(request, idtask):
+    task = get_object_or_404(Task, pk=idtask)
+    return render(request, 'taskDetail.html', {
+        'task': task
+    })
+
+def createTask(request, project_id):
+
+    if request.method == 'GET':
+        return render(request, 'createTask.html', {
+            'form': TaskForm,
+        })
+    else:
+        try:
+            form =  TaskForm(request.POST)
+            newTask = form.save(commit=False)
+            newTask.project = Project.objects.get(pk=project_id)
+            newTask.save()
+            return redirect('tasks', project_id=project_id)
+        except ValueError:
+            return render(request, 'createTask.html', {
+                'form': TaskForm(),
+                'error': 'Please provide valid data, try again.'
+            })
+        
+
+def completeTask(request, idtask):
+   task =  get_object_or_404(Task, pk=idtask)
+   if request.method == 'POST':
+       task.completed = True
+       task.save()
+       print(idtask, task.project.id)
+       return redirect('tasks', project_id = task.project.id)
