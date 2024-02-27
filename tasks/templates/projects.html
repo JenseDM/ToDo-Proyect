@@ -6,8 +6,12 @@
     <ul>
         {% for project in projects %}
             <li>
-                <h1>{{project.title}}</h1>
-                <p>{{project.user.username}}</p>
+                <a href="{% url 'tasks' project.id %}">
+                    <h1>{{project.title}}</h1>
+                    <p>{{project.user.username}}</p>
+                </a>
             </li>
         {% endfor %}
+    </ul>    
+        <a href="{% url 'createProject' %}">Create Project</a>
 {% endblock %}
