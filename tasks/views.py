@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from .forms import ProjectForm, TaskForm
 from .models import Project, Task
-from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 # View for the home page
 def home(request):
@@ -37,6 +37,7 @@ def signup(request):
                    'error': 'Passwords did not match'
                    })
 
+@login_required
 def projects(request):
 
     projects = Project.objects.filter(user=request.user, completed=False)
@@ -45,9 +46,11 @@ def projects(request):
     
     }) 
 
+@login_required
 def signout(request):
     logout(request)
     return redirect('home')   
+
 
 def signin(request):
 
@@ -65,7 +68,8 @@ def signin(request):
         else:
             login(request, user)
             return redirect('projects')
-
+        
+@login_required
 def createProject(request):
 
     if request.method == 'GET':
@@ -84,7 +88,8 @@ def createProject(request):
                 'form': ProjectForm(),
                 'error': 'Please provide valid data, try again.'
             })
-
+        
+@login_required
 def tasks(request, project_id):
     tasks = Task.objects.filter(project=project_id, completed=False)
     return render(request, 'tasks.html', {
@@ -92,12 +97,14 @@ def tasks(request, project_id):
         'project_id': project_id
     })        
 
+@login_required
 def taskDetail(request, idtask):
     task = get_object_or_404(Task, pk=idtask)
     return render(request, 'taskDetail.html', {
         'task': task
     })
 
+@login_required
 def createTask(request, project_id):
 
     if request.method == 'GET':
@@ -117,7 +124,7 @@ def createTask(request, project_id):
                 'error': 'Please provide valid data, try again.'
             })
         
-
+@login_required
 def completeTask(request, idtask):
    task =  get_object_or_404(Task, pk=idtask)
    if request.method == 'POST':
@@ -125,3 +132,10 @@ def completeTask(request, idtask):
        task.save()
        print(idtask, task.project.id)
        return redirect('tasks', project_id = task.project.id)
+   
+@login_required   
+def deleteTask(request, idtask):
+    task =  get_object_or_404(Task, pk=idtask)
+    if request.method == 'POST':
+         task.delete()
+         return redirect('tasks', project_id = task.project.id)

@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from tasks import views
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('tasks/<int:project_id>/', views.tasks, name="tasks"),
     path('taskDetail/<int:idtask>/', views.taskDetail, name="taskDetail"),
     path('taskDetail/<int:idtask>/complete', views.completeTask, name="completeTask"),
+    path('taskDetail/<int:idtask>/delete', views.deleteTask, name="deleteTask"),
 ]
