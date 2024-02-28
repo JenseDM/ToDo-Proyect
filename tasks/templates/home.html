@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <h1>Home</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, 
-        consequatur natus cupiditate molestias sit omnis exercitationem cumque sint, 
-        recusandae quas quae ducimus excepturi, nemo eius. Reprehenderit recusandae at hic voluptas!</p>
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<div class="container">
+    <img src="{% static 'img/Logo2.png' %}" alt="">
+
+    <div class="texto">
+        <h1>Organize your tasks</h1>
+        <p>Keep track of your tasks and projects</p>
+        <a class="button-start" href="{% url 'signin' %}">Start</a>
+    </div>
+</div>        
 {% endblock %}

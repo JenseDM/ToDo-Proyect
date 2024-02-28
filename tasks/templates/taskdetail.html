@@ -9,5 +9,12 @@
         <button>
             Complete
         </button>
+        
+    </form>
+    <form action="{% url 'deleteTask' task.id %}" method="POST">
+        {% csrf_token %}
+        <button>
+            Eliminar
+        </button>
     </form>
 {% endblock %}
