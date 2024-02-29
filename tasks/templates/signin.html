@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+<div class="label-form">
+    <img src="{% static 'img/Logo3.png' %}" alt="Logo app">
+    <h2>Login</h2>
+</div>
 
-<h1>Login</h1>
-{{error}}
-<form action="/signin/" method="POST">
+<div class="alert"><p>{{error}}</p></div>
+<form class="form-login" action="/signin/" method="POST">
 
     {% csrf_token %}
-    {{form.as_p}}
+    <div class="campo">
+        <label for="username">Username</label><br>
+        {{form.username}}
+    </div>    
+    <div class="campo">
+        <label for="password">Password</label><br>
+        {{form.password}}
+    </div>
+    <a href="/signup">I'm not registered</a><br>
     <button>
         Signin
     </button>

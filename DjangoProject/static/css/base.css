@@ -11,12 +11,11 @@ body {
 header {
     display: flex;
     justify-content: space-between;
-    height: 100px;
+    max-height: 100px;
     background-color: #8c52ff;
     align-items: center;
-    padding: 5px;
+    font-size: large;
 }
-
 
 
 .logo {
@@ -26,18 +25,26 @@ header {
 
 .logo a {
     margin-right: 10px;
-    font-weight: 600px;
     text-decoration: none;
     color: white;
 }
+.logo a:hover {
+    border-bottom: 3px solid white;
+    transition: 0.1s;
+}
 
 .logo img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     margin-right: 10px;
 }
 
-.nav-link {
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav a {
     font-weight: 600px;
     margin-right: 10px;
     padding-bottom: 3px;
@@ -45,13 +52,19 @@ header {
     color: white;
 }
 
-.nav-link:hover {
+.nav a:hover {
     border-bottom: 3px solid white;
     color: #efefef;
     transition: 0.1s;
 }
 
+.nav span {
+    margin-right: 10px;
+    padding-bottom: 3px;
+    font-size: xx-large;
+    color: white;
+}
 
-nav .nav-link svg {
-    align-items: center;
+.nav span:hover {
+    background: none;
 }

@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    margin-right: 50px;
+    width: 40%;
+}
+
+.img-logo {
+    width: 600px;
+    height: 600px;
+    
+}
+
+.texto{
+    width: 30%;
+    text-align: center;
+    justify-content: center;
+}
+
+
+
+.button-start {
+    background-color: #8c52ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-start:hover {
+    background-color: #6e3cc4;
+    transition: 0.3s;
+}
+
+
+
+

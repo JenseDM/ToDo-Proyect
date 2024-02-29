@@ -1,5 +1,5 @@
 from django.db import IntegrityError
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect,get_object_or_404, HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -9,7 +9,9 @@ from django.contrib.auth.decorators import login_required
 
 # View for the home page
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {
+        'user': request.user
+    })
 
 # View for the signup page
 def signup(request):
@@ -39,11 +41,15 @@ def signup(request):
 
 @login_required
 def projects(request):
-
-    projects = Project.objects.filter(user=request.user, completed=False)
-    return render(request, 'projects.html', {
-        'projects': projects
     
+    projects = Project.objects.filter(user=request.user, completed=False)
+    if projects.count() == 0:
+        return render(request, 'projects.html', {
+            'message': 'You have not created any projects yet.'
+        })
+    return render(request, 'projects.html', {
+        'projects': projects,
+        'message': 'Your projects are here.'
     }) 
 
 @login_required
@@ -91,10 +97,18 @@ def createProject(request):
         
 @login_required
 def tasks(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
     tasks = Task.objects.filter(project=project_id, completed=False)
+    if tasks.count() == 0:
+        return render(request, 'tasks.html', {
+            'message': 'You have not created any tasks yet.',
+            'project_id': project_id,
+            'project': project
+        })
     return render(request, 'tasks.html', {
         'tasks': tasks,
-        'project_id': project_id
+        'project_id': project_id,
+        'project': project
     })        
 
 @login_required
@@ -130,7 +144,13 @@ def completeTask(request, idtask):
    if request.method == 'POST':
        task.completed = True
        task.save()
-       print(idtask, task.project.id)
+       finished_tasks = Task.objects.filter(project=task.project, completed=True).count()
+       all_tasks = Task.objects.filter(project=task.project).count()
+
+       if finished_tasks == all_tasks:
+            project = Project.objects.get(pk=task.project.id)
+            project.completed = True
+            project.save()
        return redirect('tasks', project_id = task.project.id)
    
 @login_required   
@@ -139,3 +159,11 @@ def deleteTask(request, idtask):
     if request.method == 'POST':
          task.delete()
          return redirect('tasks', project_id = task.project.id)
+    
+@login_required
+def deleteProject(request, project_id):
+    project =  get_object_or_404(Project, pk=project_id)
+    if request.method == 'POST':
+         project.delete()
+         return redirect('projects')
+    

@@ -1,20 +1,34 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <h1>{{task.title}}</h1>
-    <p>{{task.description}}</p>
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+<div class="title-project">
+    <a class="back-arrow" href="{% url 'tasks' task.project.id %}"><span class="material-symbols-outlined">arrow_back</span></a>
+    <h2>{{task.project.title}}/ {{task.title}}</h2>
+</div>
 
-    <form action="{% url 'completeTask' task.id %}"  method="POST">
-        {% csrf_token %}
-        <button>
-            Complete
-        </button>
-        
-    </form>
-    <form action="{% url 'deleteTask' task.id %}" method="POST">
-        {% csrf_token %}
-        <button>
-            Eliminar
-        </button>
-    </form>
+    <div class="task-detail">
+        <h3>Description</h3>
+        <p>{{task.description}}</p>
+    </div>
+
+    <div class="buttons">
+        <form action="{% url 'completeTask' task.id %}"  method="POST">
+            {% csrf_token %}
+            <button>
+                <span class="material-symbols-outlined" class="btn-icon">
+                    done
+                    </span>
+            </button>
+            
+        </form>
+        <form action="{% url 'deleteTask' task.id %}" method="POST">
+            {% csrf_token %}
+            <button>
+                <span class="material-symbols-outlined">
+                    delete
+                    </span>
+            </button>
+        </form>
+    </div>
 {% endblock %}
