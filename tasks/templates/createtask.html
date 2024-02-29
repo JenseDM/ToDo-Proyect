@@ -1,16 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}  <!--If there are no tasks--> 
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/forms.css' %}"> <!--important-->
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 <div class="label-form">
     <h1>Create a new Task</h1>
 </div>
 
-<div class="alert"><p>{{error}}</p></div>
+<div class="alert"><p>{{error}}</p></div>   <!--Show the error if exist-->
 
 <form class="form-login"  method="POST">
-
-{% csrf_token %}
+{% csrf_token %}    <!--We add the csrf_token tag to the form-->
 <div class="campo">
     <label for="title">Title</label><br>
         {{form.title}}

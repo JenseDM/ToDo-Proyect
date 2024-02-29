@@ -1,17 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}   <!--We extend the base.html template-->
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/forms.css' %}"> <!--important-->
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 <div class="label-form">
     <h1>Create a new project</h1>
 </div>
 <div class="alert"><p>{{error}}</p></div>
 
 <form class="form-login" action="/createProject/" method="POST">
-{% csrf_token %}
+{% csrf_token %} 
 <div class="campo">
     <label for="title">Title</label><br>
-        {{form.title}}
+        {{form.title}}  <!--We add the form fields-->
 </div>
     <button>
         Create

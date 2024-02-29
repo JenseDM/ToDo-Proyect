@@ -9,7 +9,7 @@
     
         <div class="container-projects">
             <ul class="list-group">
-                {% for project in projects %}
+                {% for project in projects %} <!--We iterate over the projects-->
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="{% url 'tasks' project.id %}">{{project.title}}</a>
                   <form class="form-projects" action="{% url 'deleteProject' project.id %}" method="POST">
