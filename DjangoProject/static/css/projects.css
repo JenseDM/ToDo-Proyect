@@ -1,0 +1,107 @@
+.title-project {
+    display: flex;
+    justify-content: start;
+    margin-left: 10px;
+}
+
+.title-project h2 {
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+
+.container-projects {
+    margin: 20px 20% 20px 20%;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    
+}
+
+button {
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #8c52ff;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #6e3cc4;
+    cursor: pointer;
+}
+
+.button-delete {
+    width: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+.new-project {
+    display: flex;
+    justify-content: center;
+    margin: 20px 30% 20px 30%;
+}
+
+.container-projects ul li {
+    padding: 15px;
+    border-radius: 2px solid lightgray;
+}
+
+.container-projects ul li a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.form-projects {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-projects ul li:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.see-more {
+   background-color: #8c52ff;
+   border-radius: 20px;
+   padding: 10px;
+   color: white; 
+
+}
+
+.see-more:hover {
+    background-color: #6e3cc4;
+    transition: 0.2s;
+
+}
+
+.task-detail {
+    margin: 20px 20% 20px 10%;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: end;
+    margin-right: 20%;
+}
+
+.buttons button {
+    margin-left: 10px;
+    width: 50px;
+}
+

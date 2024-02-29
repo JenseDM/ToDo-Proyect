@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Signup</h1>
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+<div class="label-form">
+    <img src="{% static 'img/Logo3.png' %}" alt="Logo app">
+    <h2>Signup</h2>
+    
+</div>
 
-{{error}}
+<div class="alert"><p>{{error}}</p></div>
 
-<form method="POST">
+<form class="form-login" method="POST">
     {% csrf_token %}
-
-    {{form.as_p}}
-
+    <div class="campo">
+        <label for="username">Username</label><br>
+        {{form.username}}
+    </div>
+    <div class="campo">
+        <label for="password1">Password</label><br>
+        {{form.password1}}
+    </div>
+    <div class="campo">
+        <label for="password2">Confirm password</label><br>
+        {{form.password2}}
+    </div>
+    <a href="/signin">I already have an account</a><br>
     <button>
         Signup
     </button>

@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Create Project</h1>
+<link rel="stylesheet" href="{% static 'css/forms.css' %}"> <!--important-->
+<div class="label-form">
+    <h1>Create a new project</h1>
+</div>
+<div class="alert"><p>{{error}}</p></div>
 
-{{error}}
-
-<form action="/createProject/" method="POST">
-
+<form class="form-login" action="/createProject/" method="POST">
 {% csrf_token %}
-{{form.as_p}}
+<div class="campo">
+    <label for="title">Title</label><br>
+        {{form.title}}
+</div>
     <button>
         Create
     </button>

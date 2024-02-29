@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Create Task</h1>
+<link rel="stylesheet" href="{% static 'css/forms.css' %}"> <!--important-->
+<div class="label-form">
+    <h1>Create a new Task</h1>
+</div>
 
-{{error}}
+<div class="alert"><p>{{error}}</p></div>
 
-<form method="POST">
+<form class="form-login"  method="POST">
 
 {% csrf_token %}
-{{form.as_p}}
+<div class="campo">
+    <label for="title">Title</label><br>
+        {{form.title}}
+</div>
+<div class="campo">
+    <label for="description">Detail</label><br>
+        {{form.description}}
+</div>
     <button>
         Create
     </button>
