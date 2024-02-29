@@ -10,6 +10,7 @@
  * python -m venv venv
  * .venv\Scripts\activate
  * pip install django
+ * python manage.py migrate
  * python manage.py runserver
  * abrir servidor local en el navegador port:8000
 
