@@ -1,11 +1,14 @@
-{% load static %}
+{% load static %}   <!--Load the static tag to use the static files-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Styles css-->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!--Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--Icon-->
     <link rel="icon" type="image/x-icon" href="{% static 'img/Logo3.png' %}">
     <title>Jensen | ToDo</title>
 </head>
@@ -14,16 +17,16 @@
         <div class="logo">
             <img class="white-logo" src="{% static 'img/Logo.png' %}" alt="Logo de la app">
                 <a class="nav-actions" href="/">Home </a>
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated %}  <!--If the user is authenticated, show the projects link-->
                 <a class="nav-actions" href="/projects">Projects</a>
                 {% endif %}
         </div>
         <div class="nav">
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated %}  <!--If the user is authenticated, show the logout link-->
                 <a class="nav-actions" href="/logout">Logout</a>
                 <a class="nav-actions" href="">{{user.username}}</a>
                 <span class="material-symbols-outlined">account_circle</span>
-                {% else %}
+                {% else %} <!--If the user is not authenticated, show the login and signup links-->
                 <a class="nav-actions" href="/signin">Login</a>
                 <a class="nav-actions" href="/signup">Signup</a>
                 {% endif %}
@@ -33,7 +36,7 @@
     
     <br><br>
     {% block content %}
-    
+        <!--Content of the page-->
     {% endblock %}
 
 </body>

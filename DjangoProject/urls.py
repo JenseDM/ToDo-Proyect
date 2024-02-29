@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from tasks import views
-from django.conf import settings
 
+# The urlpatterns list routes URLs to views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
